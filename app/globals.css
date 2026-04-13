@@ -17,7 +17,7 @@
   flex-shrink: 0;
 }
 
-/* 몬스터 공격 애니메이션 */
+/* 몬스터 공격 애니메이션 (플레이어가 틀렸을 때 화면 흔들림) */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   20%       { transform: translateX(-8px); }
@@ -40,3 +40,31 @@
 .animate-shake    { animation: shake 0.5s ease; }
 .animate-slash    { animation: slash 0.6s ease forwards; }
 .animate-float-up { animation: float-up 1.2s ease forwards; }
+
+/* 플레이어 공격 성공 시 몬스터 빨간 피격 + 흔들림 */
+@keyframes monster-hit {
+  0%   { transform: translateX(0);     filter: brightness(1) saturate(1); }
+  20%  { transform: translateX(-10px); filter: brightness(1.5) saturate(2) sepia(1) hue-rotate(300deg); }
+  40%  { transform: translateX(10px);  filter: brightness(1.5) saturate(2) sepia(1) hue-rotate(300deg); }
+  60%  { transform: translateX(-6px);  filter: brightness(1.2) saturate(1.5) sepia(0.5) hue-rotate(300deg); }
+  80%  { transform: translateX(6px);   filter: brightness(1); }
+  100% { transform: translateX(0);     filter: brightness(1) saturate(1); }
+}
+
+.animate-monster-hit {
+  animation: monster-hit 0.5s ease-in-out;
+}
+
+/* 플레이어 공격 실패 시 빨간 노이즈 오버레이 */
+@keyframes red-noise {
+  0%   { background-color: rgba(255, 0, 0, 0); }
+  10%  { background-color: rgba(255, 0, 0, 0.25); }
+  30%  { background-color: rgba(255, 0, 0, 0.15); }
+  50%  { background-color: rgba(255, 0, 0, 0.3); }
+  70%  { background-color: rgba(255, 0, 0, 0.1); }
+  100% { background-color: rgba(255, 0, 0, 0); }
+}
+
+.animate-red-noise {
+  animation: red-noise 0.6s ease-in-out forwards;
+}

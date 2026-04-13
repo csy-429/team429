@@ -1,6 +1,5 @@
 'use client';
 
-import { useCallback } from 'react';
 import { useBattle } from '@/hooks/useBattle';
 import { MonsterHealthBar } from './MonsterHealthBar';
 import { PlayerHealthBar } from './PlayerHealthBar';
@@ -46,7 +45,16 @@ export function BattleArena({ monster, questions, onVictory }: BattleArenaProps)
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-950 to-black flex flex-col">
+    <div className="relative min-h-screen bg-gradient-to-b from-gray-900 via-gray-950 to-black flex flex-col">
+
+      {/* 공격 실패 시 빨간 노이즈 오버레이 */}
+      {state.phase === 'monsterAttack' && (
+        <div
+          key={state.currentQuestionIndex}
+          className="animate-red-noise absolute inset-0 z-30 pointer-events-none"
+        />
+      )}
+
       {/* HP 바 영역 */}
       <div className="px-4 pt-14 pb-3 bg-black/40 border-b border-gray-800">
         <MonsterHealthBar
@@ -59,18 +67,21 @@ export function BattleArena({ monster, questions, onVictory }: BattleArenaProps)
       {/* 몬스터 + 애니메이션 */}
       <div className="relative flex-1 flex items-center justify-center py-8">
         <div className={`text-center transition-all ${
-          state.phase === 'monsterAttack' ? 'animate-shake' : ''
+          state.phase === 'playerAttack' ? 'animate-monster-hit' : ''
         }`}>
-          <div className="text-[8rem] leading-none mb-2">
+          <div className="mb-2">
             {monster.spriteUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={monster.spriteUrl}
                 alt={monster.name}
-                className="w-40 h-40 object-contain mx-auto"
+                className="w-100 h-100 object-contain mx-auto"
+                style={{ mixBlendMode: 'screen' }}
               />
             ) : (
-              monster.subject === 'math' ? '🐉' : monster.subject === 'science' ? '👻' : '💀'
+              <div className="text-[8rem] leading-none">
+                {monster.subject === 'math' ? '🐉' : monster.subject === 'science' ? '👻' : '💀'}
+              </div>
             )}
           </div>
           <p className="text-gray-500 text-sm">{monster.name}</p>
