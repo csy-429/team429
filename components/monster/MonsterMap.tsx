@@ -62,7 +62,7 @@ export function MonsterMap({ defaultSubject }: { defaultSubject: string }) {
       {/* 헤더 */}
       <div className="flex items-center justify-between px-4 pt-6 pb-3 relative z-10">
         <div className="flex items-center gap-3">
-          <button onClick={() => router.back()} className="text-gray-300 hover:text-white text-xl">
+          <button onClick={() => router.push('/map')} className="text-gray-300 hover:text-white text-xl">
             ←
           </button>
           <div>
