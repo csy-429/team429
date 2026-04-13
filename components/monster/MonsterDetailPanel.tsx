@@ -119,7 +119,7 @@ export function MonsterDetailPanel({
             <div className="space-y-2">
               {lessonTitles.map((title, i) => {
                 const lessonId = monster.lessonIds[i];
-                const watched  = progress?.watchedLessonIds.includes(lessonId) ?? false;
+                const watched = progress?.watchedLessonIds?.includes(lessonId) ?? false;
                 return (
                   <div
                     key={i}

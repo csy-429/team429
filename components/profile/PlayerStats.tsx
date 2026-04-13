@@ -10,8 +10,8 @@ interface PlayerStatsProps {
 
 export function PlayerStats({ userData, progressMap }: PlayerStatsProps) {
   const defeatedCount     = Object.values(progressMap).filter(p => p.defeated).length;
-  const watchedLessons    = Object.values(progressMap).reduce((acc, p) => acc + p.watchedLessonIds.length, 0);
-  const completedQuizzes  = Object.values(progressMap).reduce((acc, p) => acc + p.completedQuizIds.length, 0);
+  const watchedLessons   = Object.values(progressMap).reduce((acc, p) => acc + (p.watchedLessonIds ?? []).length, 0);
+  const completedQuizzes = Object.values(progressMap).reduce((acc, p) => acc + (p.completedQuizIds ?? []).length, 0);
 
   const stats = [
     { icon: '☠️', label: '처치한 몬스터', value: defeatedCount },
