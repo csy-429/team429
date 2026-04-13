@@ -97,7 +97,7 @@ export function ShortsFeed({ monsterId, items, progress, onAllLessonsWatched }: 
               key={item.question.id}
               question={item.question}
               lessonTitle={lessonTitle}
-              isCompleted={progress?.completedQuizIds.includes(item.question.id) ?? false}
+              isCompleted={progress?.completedQuizIds?.includes(item.question.id) ?? false}
               onCorrect={handleQuizCorrect}
             />
           );
