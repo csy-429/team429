@@ -29,6 +29,7 @@ export interface Monster {
   expReward: number;
   lessonIds: string[];
   order: number;
+  position?: { x: number; y: number };
 }
 
 // ─── Lesson ───────────────────────────────────────────────────────────────────
